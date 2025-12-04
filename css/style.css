@@ -1,0 +1,11 @@
+body {
+    background: #f7f7f7;
+}
+
+#mainContainer {
+    margin: 20px;
+}
+
+#w3-modal-content {
+    max-width: 400px;
+}

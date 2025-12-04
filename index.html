@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bookstore System</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body style="font-family: 'Roboto', sans-serif;">
+
+    <header class="w3-container w3-teal w3-padding">
+        <h2 class="w3-left">Bookstore System</h2>
+
+        <button id="signupBtn" class="w3-button w3-white w3-right"
+            onclick="document.getElementById('signupModal').style.display='block'">Sign Up</button>
+
+        <button id="loginBtn" class="w3-button w3-white w3-right" style="margin-right:10px;"
+            onclick="document.getElementById('loginModal').style.display='block'">Login</button>
+
+        <button id="logoutBtn" class="w3-button w3-white w3-right"
+            style="margin-right:10px; display:none;">Logout</button>
+    </header>
+
+    <div class="w3-container" id="mainContainer">
+        <div id="roleContainer" class="w3-card w3-light-grey w3-padding w3-margin-top">
+            <h3>Welcome! Please login or signup.</h3>
+        </div>
+
+        <div id="booksContainer" class="w3-row-padding w3-margin-top">
+            <h4>Available Books</h4>
+            <div id="booksList" class="w3-row-padding"></div>
+        </div>
+
+        <div id="otherItemsContainer" class="w3-card w3-pale-yellow w3-padding w3-margin-top" style="display:none;">
+            <h4>Order Items</h4>
+            <ul id="itemsList"></ul>
+        </div>
+    </div>
+
+    <div id="signupModal" class="w3-modal w3-animate-opacity">
+        <div class="w3-modal-content w3-card-4 w3-animate-top">
+            <header class="w3-container w3-teal">
+                <span onclick="document.getElementById('signupModal').style.display='none'"
+                    class="w3-button w3-display-topright">&times;</span>
+                <h2>Sign Up</h2>
+            </header>
+            <div class="w3-container w3-padding">
+                <form id="signupForm">
+                    <label>Role:</label>
+                    <select class="w3-input" name="role" required>
+                        <option value="user">User</option>
+                        <option value="supplier">Supplier</option>
+                    </select>
+                    <label>Username:</label>
+                    <input class="w3-input" type="text" name="username" required>
+                    <label>Email:</label>
+                    <input class="w3-input" type="email" name="email" required>
+                    <label>Phone:</label>
+                    <input class="w3-input" type="text" name="phone" required>
+                    <label>Password:</label>
+                    <input class="w3-input" type="password" name="password" required>
+                    <button type="submit" class="w3-button w3-teal w3-margin-top">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="loginModal" class="w3-modal w3-animate-opacity">
+        <div class="w3-modal-content w3-card-4 w3-animate-top">
+            <header class="w3-container w3-teal">
+                <span onclick="document.getElementById('loginModal').style.display='none'"
+                    class="w3-button w3-display-topright">&times;</span>
+                <h2>Login</h2>
+            </header>
+            <div class="w3-container w3-padding">
+                <form id="loginForm">
+                    <label>Username:</label>
+                    <input class="w3-input" type="text" name="username" required>
+                    <label>ID:</label>
+                    <input class="w3-input" type="text" name="id" required>
+                    <label>Password:</label>
+                    <input class="w3-input" type="password" name="password" required>
+                    <button type="submit" class="w3-button w3-teal w3-margin-top">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="addressModal" class="w3-modal w3-animate-opacity">
+        <div class="w3-modal-content w3-card-4 w3-animate-top">
+            <header class="w3-container w3-teal">
+                <span onclick="document.getElementById('addressModal').style.display='none'"
+                    class="w3-button w3-display-topright">&times;</span>
+                <h2>Address Input</h2>
+            </header>
+            <div class="w3-container w3-padding">
+                <form id="addressForm">
+                    <label>Street:</label>
+                    <input class="w3-input" type="text" name="street" required>
+                    <label>City:</label>
+                    <input class="w3-input" type="text" name="city" required>
+                    <label>State:</label>
+                    <input class="w3-input" type="text" name="state" required>
+                    <label>ZIP:</label>
+                    <input class="w3-input" type="text" name="zip" required>
+                    <button type="submit" class="w3-button w3-teal w3-margin-top">Save Address</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="adminContainer" class="w3-container" style="display:none;">
+        <h3>Admin Dashboard</h3>
+        <div id="adminBooksList" class="w3-row w3-margin-top"></div>
+
+        <button class="w3-button w3-teal" onclick="showSummary()">Summary</button>
+
+        <div id="summaryContainer" style="display:none;">
+            <label>Select Date:</label>
+            <input type="date" id="summaryDate">
+            <button class="w3-button w3-blue" onclick="getDailySummary()">Show Summary</button>
+            <div id="summaryResult"></div>
+        </div>
+    </div>
+
+    <div id="supplierContainer" class="w3-container" style="display:none;">
+        <h3>Supplier Dashboard</h3>
+        <div id="supplierOrdersList"></div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/supplier.js"></script>
+
+</body>
+
+</html>
