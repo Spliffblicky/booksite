@@ -8,7 +8,6 @@ $status = $data["status"];
 
 $stmt = $conn->prepare("UPDATE orders SET status=? WHERE order_id=?");
 $stmt->bind_param("si", $status, $order_id);
+$stmt->execute();
 
-echo $stmt->execute()
-    ? json_encode(["status" => "success"])
-    : json_encode(["status" => "error"]);
+echo json_encode(["status" => $stmt->affected_rows > 0 ? "success" : "error"]);

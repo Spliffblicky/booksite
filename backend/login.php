@@ -2,6 +2,12 @@
 require "config.php";
 
 $data = json_decode(file_get_contents("php://input"), true);
+
+if (!$data || !isset($data["username"]) || !isset($data["id"]) || !isset($data["password"])) {
+    echo json_encode(["status" => "error"]);
+    exit;
+}
+
 $username = $data["username"];
 $id = $data["id"];
 $password = $data["password"];
@@ -12,14 +18,14 @@ $stmt->execute();
 $res = $stmt->get_result();
 
 if ($res->num_rows === 0) {
-    echo json_encode(["status" => "error", "message" => "User not found"]);
+    echo json_encode(["status" => "error"]);
     exit;
 }
 
 $user = $res->fetch_assoc();
 
 if (!password_verify($password, $user["password"])) {
-    echo json_encode(["status" => "error", "message" => "Invalid password"]);
+    echo json_encode(["status" => "error"]);
     exit;
 }
 
