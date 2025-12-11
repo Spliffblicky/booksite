@@ -24,7 +24,7 @@ if ($stmt->num_rows > 0) {
 $stmt->close();
 
 if ($role === 'user') {
-    $prefix = '10';
+    $prefix = '110';
     $stmt = $conn->prepare("SELECT userid FROM users WHERE role='user' ORDER BY userid DESC LIMIT 1");
     $stmt->execute();
     $stmt->bind_result($lastId);
@@ -33,13 +33,13 @@ if ($role === 'user') {
     $num = $lastId ? (int)substr($lastId, strlen($prefix)) + 1 : 1;
     $userid = $prefix . $num;
 } elseif ($role === 'supplier') {
-    $prefix = '110';
+    $prefix = '10';
     $stmt = $conn->prepare("SELECT userid FROM users WHERE role='supplier' ORDER BY userid DESC LIMIT 1");
     $stmt->execute();
     $stmt->bind_result($lastId);
     $stmt->fetch();
     $stmt->close();
-    $num = $lastId ? (int)substr($lastId, strlen($prefix)) + 1 : 1;
+    $num = $lastId ? (int)substr($lastId, strlen($prefix)) + 2 : 1;
     $userid = $prefix . $num;
 } else {
     echo json_encode(["status" => "error"]);

@@ -1,15 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
     const role = sessionStorage.getItem("role");
     const userId = sessionStorage.getItem("user_id");
-    if (role !== "supplier") return;
-
-    loadSupplierOrders(userId);
+    if (role === "supplier" && userId) loadSupplierOrders(userId);
 });
 
 function loadSupplierOrders(supplierId) {
-    fetch(API + "getsupplierorder.php?supplier_id=" + supplierId)
+    fetch(`${API}getsupplierorder.php?supplier_id=${supplierId}`)
         .then(res => res.json())
-        .then(displaySupplierOrders)
+        .then(orders => displaySupplierOrders(orders))
         .catch(err => {
             console.error(err);
             document.getElementById("supplierOrdersList").innerHTML =
@@ -43,13 +41,12 @@ function displaySupplierOrders(orders) {
                 onclick="updateSupplierOrderStatus(${o.order_id}, 'rejected')"
                 ${o.status !== "pending" ? "disabled" : ""}>DENY</button>
         `;
-
         container.appendChild(card);
     });
 }
 
 function updateSupplierOrderStatus(order_id, status) {
-    fetch(API + "update_order_status.php", {
+    fetch(`${API}update_order_status.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ order_id, status })
@@ -57,10 +54,10 @@ function updateSupplierOrderStatus(order_id, status) {
         .then(res => res.json())
         .then(result => {
             if (result.status === "success") {
-                alert("Order updated to: " + status);
+                alert(`Order updated to: ${status.toUpperCase()}`);
                 loadSupplierOrders(sessionStorage.getItem("user_id"));
             } else {
-                alert("Error updating order");
+                alert(result.message || "Error updating order");
             }
         })
         .catch(err => {

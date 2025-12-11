@@ -12,6 +12,9 @@ const loginBtn = document.getElementById('loginBtn');
 const signupBtn = document.getElementById('signupBtn');
 const logoutBtn = document.getElementById('logoutBtn');
 const otherItemsContainer = document.getElementById('otherItemsContainer');
+const placeorderbtn = document.getElementById('placeorderbtn');
+const ordertotal = document.getElementById('ordertotal');
+const totalamount = document.getElementById('totalamount');
 
 document.addEventListener("DOMContentLoaded", () => {
     const savedId = sessionStorage.getItem("user_id");
@@ -47,23 +50,29 @@ if (signupForm) {
     });
 }
 
-if (loginForm) {
-    loginForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const formData = new FormData(this);
+loginForm.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-        fetch(API + "login.php", { method: "POST", body: formData })
-            .then(res => res.json())
-            .then(result => {
-                if (result.status === "success") {
-                    loginUser(result.user_id, formData.get("username"), result.role);
-                    this.reset();
-                } else {
-                    alert(result.message);
-                }
-            });
-    });
-}
+    const username = this.username.value;
+    const password = this.password.value;
+
+    fetch(API + "login.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+    })
+        .then(res => res.json())
+        .then(result => {
+            if (result.status === "success") {
+                loginUser(result.user_id, result.username, result.role);
+                this.reset();
+                document.getElementById("loginModal").style.display = "none";
+            } else {
+                alert(result.message);
+            }
+        });
+});
+
 
 logoutBtn?.addEventListener("click", () => {
     sessionStorage.clear();
@@ -132,14 +141,14 @@ async function loadBooks() {
             const div = document.createElement("div");
 
             div.innerHTML = `
-                <div class="w3-padding w3-container w3-col s12 m6 l4" style="height:650px; border:1px solid #ccc; border-radius:5px;">
+                <div class="w3-padding w3-container w3-col s12 m6 l4" style="height:720px; border:1px solid #ccc; border-radius:5px;">
                     <img src="${book.image_path}" style="width:100%; height:490px; object-fit:cover;" alt="${book.bookname}" />
                     <h4>${book.bookname}</h4>
                     <p>${book.author}</p>
                     <p>$${parseFloat(book.price).toFixed(2)}</p>
                     <p>Stock: ${book.quantity}</p>
                     ${currentUser?.role === "user"
-                    ? `<button class="w3-button w3-teal" onclick="addToOrder('${book.bookname}', ${book.price}, ${book.quantity})">Order</button>`
+                    ? `<button class="w3-button w3-teal" onclick="addToOrder(${book.book_id}, '${book.bookname}', ${book.price}, ${book.quantity})">Order</button>`
                     : `<button class="w3-button w3-gray" disabled>Login as User</button>`
                 }
                 </div>
@@ -172,14 +181,61 @@ function updateOrderList() {
     orderItems.forEach(i => {
         const li = document.createElement("li");
         li.innerHTML = `
-            ${i.bookname} - $${i.price} x ${i.quantity}
+            ${i.bookname} - $${i.price} x ${i.quantity} = $${(i.price * i.quantity).toFixed(2)}
             <button class="w3-button w3-red w3-small" onclick="removeFromOrder(${i.book_id})">Remove</button>
         `;
         itemsList.appendChild(li);
     });
+
+
+    if (ordertotal) {
+        ordertotal.innerText = `$${pricetotal()}`;
+    }
 }
 
 function removeFromOrder(id) {
     orderItems = orderItems.filter(i => i.book_id !== id);
     updateOrderList();
 }
+
+function pricetotal() {
+    let total = 0;
+    orderItems.forEach(i => {
+        total += i.price * i.quantity;
+    });
+    return total.toFixed(2);
+}
+
+
+
+placeorderbtn?.addEventListener("click", () => {
+    if (orderItems.length === 0) {
+        alert("No items in order.");
+        return;
+    }
+
+    const orderData = {
+        user_id: currentUser.id,
+        items: orderItems
+    };
+
+    fetch(API + "placeorder.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData)
+    })
+        .then(res => res.json())
+        .then(result => {
+            if (result.status === "success") {
+                alert("Order placed successfully!");
+                orderItems = [];
+                updateOrderList();
+            } else {
+                alert(result.message);
+            }
+        });
+});
+
+ordertotal.innerText = `$${pricetotal()}`;
+
+
