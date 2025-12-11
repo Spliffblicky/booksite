@@ -1,5 +1,3 @@
-const API = "http://localhost:8080/backend/";
-
 document.addEventListener('DOMContentLoaded', () => {
     if (sessionStorage.getItem('role') === 'admin') loadAdminBooks();
 });

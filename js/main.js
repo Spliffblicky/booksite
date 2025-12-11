@@ -1,5 +1,3 @@
-const API = "http://localhost:8080/backend/";
-
 let isLoggedIn = false;
 let currentUser = null;
 let orderItems = [];
@@ -132,17 +130,16 @@ async function loadBooks() {
 
         books.forEach(book => {
             const div = document.createElement("div");
-            div.className = "w3-col s12 m6 l4 w3-margin-bottom";
 
             div.innerHTML = `
-                <div class="w3-padding">
-                    <img src="${book.image_path}" style="width:100%; height:200px; object-fit:cover">
+                <div class="w3-padding w3-container w3-col s12 m6 l4" style="height:650px; border:1px solid #ccc; border-radius:5px;">
+                    <img src="${book.image_path}" style="width:100%; height:490px; object-fit:cover;" alt="${book.bookname}" />
                     <h4>${book.bookname}</h4>
                     <p>${book.author}</p>
                     <p>$${parseFloat(book.price).toFixed(2)}</p>
                     <p>Stock: ${book.quantity}</p>
                     ${currentUser?.role === "user"
-                    ? `<button class="w3-button w3-teal" onclick="addToOrder(${book.book_id}, '${book.bookname}', ${book.price}, ${book.quantity})">Order</button>`
+                    ? `<button class="w3-button w3-teal" onclick="addToOrder('${book.bookname}', ${book.price}, ${book.quantity})">Order</button>`
                     : `<button class="w3-button w3-gray" disabled>Login as User</button>`
                 }
                 </div>

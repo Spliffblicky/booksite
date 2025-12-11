@@ -1,5 +1,3 @@
-const API = "http://localhost:8080/backend/";
-
 document.addEventListener("DOMContentLoaded", () => {
     const role = sessionStorage.getItem("role");
     const userId = sessionStorage.getItem("user_id");
