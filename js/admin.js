@@ -17,22 +17,27 @@ async function loadAdminBooks() {
 
         books.forEach(b => {
             const div = document.createElement("div");
-            div.className = "w3-card w3-padding w3-margin-bottom";
+            div.className = "w3-container w3-col s12 m6 l4 w3-padding w3-margin-bottom book-card";
+            div.style.height = "100%";
 
             div.innerHTML = `
-                <h4>${b.bookname}</h4>
-                <p>${b.author}</p>
-                <p>${b.description}</p>
-                <p>Stock: ${b.quantity}</p>
-                <p>Price: $${parseFloat(b.price).toFixed(2)}</p>
-                <p>Supplier ID: ${b.supplier_id}</p>
+                <div class="w3-card w3-padding" style="height:100%;">
+                    <h4>${b.bookname}</h4>
+                    <p>${b.author}</p>
 
-                <input type="number" id="qty_${b.book_id}" class="w3-input w3-margin-top" placeholder="Order quantity">
+                    <p class="book-description">${b.description}</p>
 
-                <button class="w3-button w3-blue w3-margin-top"
-                onclick="orderFromSupplier(${b.book_id}, ${b.supplier_id}, '${b.bookname}', ${b.price})">
-                    Order More
-                </button>
+                    <p>Stock: ${b.quantity}</p>
+                    <p>Price: $${parseFloat(b.price).toFixed(2)}</p>
+                    <p>Supplier ID: ${b.supplier_id}</p>
+
+                    <input type="number" id="qty_${b.book_id}" class="w3-input w3-margin-top" placeholder="Order quantity">
+
+                    <button class="w3-button w3-blue w3-margin-top"
+                    onclick="orderFromSupplier(${b.book_id}, ${b.supplier_id}, '${b.bookname}', ${b.price})">
+                        Order More
+                    </button>
+                </div>
             `;
 
             list.appendChild(div);
@@ -42,6 +47,7 @@ async function loadAdminBooks() {
         list.innerHTML = "Error loading books";
     }
 }
+
 
 function orderFromSupplier(book_id, supplier_id, bookname, price) {
     const qty = parseInt(document.getElementById(`qty_${book_id}`).value);

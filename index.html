@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Bookstore System</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -120,27 +119,32 @@
     <div id="adminContainer" class="w3-container" style="display:none;">
         <h2>Admin Dashboard</h2>
 
-        <div id="adminBooksList"></div>
 
-        <h3>User Orders</h3>
-        <button onclick="toggleOrders()" class="w3-button w3-teal">Toggle Orders</button>
-        <div id="ordersList" style="display:none;"></div>
+        <div id="adminBooksList" style="min-height: 150px;"></div>
 
-        <h3>Daily Summary</h3>
-        <input type="date" id="summaryDate" class="w3-input w3-margin-bottom">
-        <button onclick="getDailySummary()" class="w3-button w3-blue">Get Summary</button>
-        <div id="summaryResult"></div>
+
+        <div class="w3-container w3-margin-top" style="height:fit-content; border:1px solid #ccc; padding:10px;">
+            <h3>User Orders</h3>
+            <button onclick="toggleOrders()" class="w3-button w3-teal">Toggle Orders</button>
+            <div id="ordersList" style="display:none;"></div>
+        </div>
+
+
+        <div class="w3-container w3-margin-top" style="height:fit-content; border:1px solid #ccc; padding:10px;">
+            <h3>Daily Summary</h3>
+
+            <label>Select Date:</label>
+            <input type="date" id="summaryDate" class="w3-input w3-margin-bottom">
+
+            <button onclick="getDailySummary()" class="w3-button w3-blue">Get Summary</button>
+            <button onclick="showSummary()" class="w3-button w3-teal">Toggle Summary</button>
+
+            <div id="summaryContainer" style="display:none; margin-top:10px;">
+                <div id="summaryResult" class="w3-padding w3-light-grey"></div>
+            </div>
+        </div>
     </div>
 
-
-    <button class="w3-button w3-teal" onclick="showSummary()">Summary</button>
-
-    <div id="summaryContainer" style="display:none;">
-        <label>Select Date:</label>
-        <input type="date" id="summaryDate">
-        <button class="w3-button w3-blue" onclick="getDailySummary()">Show Summary</button>
-        <div id="summaryResult"></div>
-    </div>
 
     <div id="supplierContainer" class="w3-container" style="display:none;">
         <h3>Supplier Dashboard</h3>

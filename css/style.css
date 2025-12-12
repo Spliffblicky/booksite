@@ -9,3 +9,21 @@ body {
 #w3-modal-content {
     max-width: 400px;
 }
+
+div.book-card {
+    position: relative;
+}
+
+div.book-card .book-description {
+    display: none;
+}
+
+div.book-card:hover .book-description {
+    display: block;
+}
+
+div.book-card .book-actions {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}

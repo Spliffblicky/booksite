@@ -12,7 +12,7 @@ const loginBtn = document.getElementById('loginBtn');
 const signupBtn = document.getElementById('signupBtn');
 const logoutBtn = document.getElementById('logoutBtn');
 const otherItemsContainer = document.getElementById('otherItemsContainer');
-const placeorderbtn = document.getElementById('placeorderbtn');
+const placeOrderBtn = document.getElementById('placeOrderBtn');
 const ordertotal = document.getElementById('ordertotal');
 const totalamount = document.getElementById('totalamount');
 
@@ -208,7 +208,7 @@ function pricetotal() {
 
 
 
-placeorderbtn?.addEventListener("click", () => {
+placeOrderBtn?.addEventListener("click", () => {
     if (orderItems.length === 0) {
         alert("No items in order.");
         return;
@@ -219,7 +219,7 @@ placeorderbtn?.addEventListener("click", () => {
         items: orderItems
     };
 
-    fetch(API + "placeorder.php", {
+    fetch(API + "order.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderData)

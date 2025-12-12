@@ -1,5 +1,6 @@
 <?php
 require "config.php";
+require "generate_order_code.php";
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -16,9 +17,12 @@ $q->execute();
 $supplier = $q->get_result()->fetch_assoc();
 $supplier_id = $supplier["supplier_id"];
 
-$stmt = $conn->prepare("INSERT INTO orders (order_type, user_id, supplier_id, order_date, status, amount) VALUES ('user', ?, ?, NOW(), 'pending', ?)");
-$stmt->bind_param("iid", $user_id, $supplier_id, $total);
+$order_code = generateOrderCode($conn);
+
+$stmt = $conn->prepare("INSERT INTO orders (order_code, order_type, user_id, supplier_id, order_date, status, amount) VALUES (?, 'user', ?, ?, NOW(), 'pending', ?)");
+$stmt->bind_param("siid", $order_code, $user_id, $supplier_id, $total);
 $stmt->execute();
+
 $order_id = $stmt->insert_id;
 
 $stmt_item = $conn->prepare("INSERT INTO order_items (order_id, book_id, oi_quantity, price) VALUES (?, ?, ?, ?)");
@@ -26,7 +30,13 @@ $stmt_item = $conn->prepare("INSERT INTO order_items (order_id, book_id, oi_quan
 foreach ($items as $i) {
     $stmt_item->bind_param("iiid", $order_id, $i["book_id"], $i["quantity"], $i["price"]);
     $stmt_item->execute();
+
+
     $conn->query("UPDATE books SET quantity = quantity - {$i['quantity']} WHERE book_id={$i['book_id']}");
 }
 
-echo json_encode(["status" => "success", "order_id" => $order_id]);
+echo json_encode([
+    "status" => "success",
+    "order_id" => $order_id,
+    "order_code" => $order_code
+]);

@@ -22,10 +22,10 @@ while ($row = $res->fetch_assoc()) {
     if (!isset($orders[$id])) {
         $orders[$id] = [
             "order_id" => $row["order_id"],
-            "user_id" => $row["user_id"],
+            "userid" => $row["userid"],
             "username" => $row["username"],
             "status" => $row["status"],
-            "total" => $row["total_amount"],
+            "total" => $row["amount"],
             "items" => []
         ];
     }
