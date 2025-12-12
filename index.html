@@ -120,17 +120,49 @@
         <h2>Admin Dashboard</h2>
 
 
-        <div id="adminBooksList" style="min-height: 150px;"></div>
-
-
-        <div class="w3-container w3-margin-top" style="height:fit-content; border:1px solid #ccc; padding:10px;">
+        <div class=w3-container id="adminBooksList" style="min-height: fit-content;"></div>
+        <div class="w3-container">
+            <div id="addnewbook" class="w3-modal">
+                <div class="w3-modal-content">
+                    <header class="w3-container w3-teal">
+                        <span onclick="document.getElementById('addnewbook').style.display='none'"
+                            class="w3-button w3-display-topright">&times;</span>
+                        <h2>Add New Book</h2>
+                    </header>
+                    <div class="w3-container w3-padding">
+                        <form id="addBookForm" action="#" method="POST">
+                            <label>Title:</label>
+                            <input class="w3-input" type="text" name="title" required>
+                            <label>Author:</label>
+                            <input class="w3-input" type="text" name="author" required>
+                            <label>Price:</label>
+                            <input class="w3-input" type="number" step="0.01" name="price" required>
+                            <label>Stock:</label>
+                            <input class="w3-input" type="number" name="stock" required>
+                            <label>Supplier:</label>
+                            <input class="w3-input" type="text" name="supplier" required>
+                            <label>Book Image URL:</label>
+                            <input class="w3-input" type="text" name="imageUrl" required>
+                            <button type="submit" class="w3-button w3-teal w3-margin-top">Add Book</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <button onclick="document.getElementById('addnewbook').style.display='block'"
+                class="w3-button w3-green w3-margin-top">Add New Book</button>
+        </div>
+    </div>
+    <div class="w3container">
+        <div class="w3-container w3-left w3-margin-top"
+            style="height:fit-content; width:50%; border:1px solid #ccc; padding:10px;">
             <h3>User Orders</h3>
             <button onclick="toggleOrders()" class="w3-button w3-teal">Toggle Orders</button>
             <div id="ordersList" style="display:none;"></div>
         </div>
 
 
-        <div class="w3-container w3-margin-top" style="height:fit-content; border:1px solid #ccc; padding:10px;">
+        <div class="w3-container w3-right w3-margin-top"
+            style="height:fit-content; width:50%; border:1px solid #ccc; padding:10px;">
             <h3>Daily Summary</h3>
 
             <label>Select Date:</label>
@@ -143,6 +175,7 @@
                 <div id="summaryResult" class="w3-padding w3-light-grey"></div>
             </div>
         </div>
+    </div>
     </div>
 
 

@@ -227,14 +227,16 @@ placeOrderBtn?.addEventListener("click", () => {
         .then(res => res.json())
         .then(result => {
             if (result.status === "success") {
-                alert("Order placed successfully!");
+                alert(`Order placed successfully! Order ID: ${result.order_id}`);
                 orderItems = [];
                 updateOrderList();
             } else {
-                alert(result.message);
+                alert(result.message || "Failed to place order");
             }
-        });
+        })
+        .catch(err => alert("Network error: " + err));
 });
+
 
 ordertotal.innerText = `$${pricetotal()}`;
 

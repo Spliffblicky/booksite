@@ -1,0 +1,40 @@
+[12-Dec-2025 17:05:14 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'supplier_id' in 'field list' in C:\xampp\htdocs\site\backend\order.php:57
+Stack trace:
+#0 C:\xampp\htdocs\site\backend\order.php(57): mysqli->prepare('INSERT INTO ord...')
+#1 {main}
+  thrown in C:\xampp\htdocs\site\backend\order.php on line 57
+[12-Dec-2025 17:06:56 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Column count doesn't match value count at row 1 in C:\xampp\htdocs\site\backend\order.php:57
+Stack trace:
+#0 C:\xampp\htdocs\site\backend\order.php(57): mysqli->prepare('INSERT INTO ord...')
+#1 {main}
+  thrown in C:\xampp\htdocs\site\backend\order.php on line 57
+[12-Dec-2025 17:09:15 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'user_id' in 'where clause' in C:\xampp\htdocs\site\backend\order.php:49
+Stack trace:
+#0 C:\xampp\htdocs\site\backend\order.php(49): mysqli->prepare('SELECT role FRO...')
+#1 {main}
+  thrown in C:\xampp\htdocs\site\backend\order.php on line 49
+[12-Dec-2025 17:17:15 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Column count doesn't match value count at row 1 in C:\xampp\htdocs\site\backend\order.php:45
+Stack trace:
+#0 C:\xampp\htdocs\site\backend\order.php(45): mysqli->prepare('INSERT INTO ord...')
+#1 {main}
+  thrown in C:\xampp\htdocs\site\backend\order.php on line 45
+[12-Dec-2025 17:19:13 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Column count doesn't match value count at row 1 in C:\xampp\htdocs\site\backend\order.php:45
+Stack trace:
+#0 C:\xampp\htdocs\site\backend\order.php(45): mysqli->prepare('INSERT INTO ord...')
+#1 {main}
+  thrown in C:\xampp\htdocs\site\backend\order.php on line 45
+[12-Dec-2025 17:22:06 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Column count doesn't match value count at row 1 in C:\xampp\htdocs\site\backend\order.php:45
+Stack trace:
+#0 C:\xampp\htdocs\site\backend\order.php(45): mysqli->prepare('INSERT INTO ord...')
+#1 {main}
+  thrown in C:\xampp\htdocs\site\backend\order.php on line 45
+[12-Dec-2025 17:23:38 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'oi_quantity' in 'field list' in C:\xampp\htdocs\site\backend\order.php:50
+Stack trace:
+#0 C:\xampp\htdocs\site\backend\order.php(50): mysqli->prepare('INSERT INTO ord...')
+#1 {main}
+  thrown in C:\xampp\htdocs\site\backend\order.php on line 50
+[12-Dec-2025 17:25:21 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'oi.quantity' in 'field list' in C:\xampp\htdocs\site\backend\order.php:50
+Stack trace:
+#0 C:\xampp\htdocs\site\backend\order.php(50): mysqli->prepare('INSERT INTO ord...')
+#1 {main}
+  thrown in C:\xampp\htdocs\site\backend\order.php on line 50
